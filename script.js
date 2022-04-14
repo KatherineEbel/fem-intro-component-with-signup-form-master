@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     span.textContent = message;
     label.classList.toggle('error');
     label.appendChild(span);
-    setTimeout(toggleFade.bind(null, span), 200)
+    setTimeout(toggleFade.bind(null, span), 200);
   }
 
   function showError(field) {
     let message;
     let label = field.closest('label');
     if (field.validity.valueMissing) {
-      let labelText = label.getAttribute('aria-label')
+      let labelText = label.getAttribute('aria-label');
       message = `${labelText} cannot be empty`;
     }
     if (field.validity.patternMismatch) {
@@ -30,26 +30,38 @@ document.addEventListener('DOMContentLoaded', () => {
     appendError(label, message);
   }
 
-  form.addEventListener('blur', () => {
-    if (!submitBtn.disabled) return;
-    submitBtn.disabled = form.checkValidity();
-  }, true);
+  document
+    .querySelector('.terms a')
+    .addEventListener('click', (e) => e.preventDefault());
 
-  form.addEventListener('focus', ({target}) => {
-    let parent = target.parentElement;
-    if (!parent.classList.contains('error')) return;
-    parent.classList.toggle('error');
-    toggleFade(parent.querySelector('span')).remove();
-  }, true)
+  form.addEventListener(
+    'blur',
+    () => {
+      if (!submitBtn.disabled) return;
+      submitBtn.disabled = form.checkValidity();
+    },
+    true,
+  );
+
+  form.addEventListener(
+    'focus',
+    ({ target }) => {
+      let parent = target.parentElement;
+      if (!parent.classList.contains('error')) return;
+      parent.classList.toggle('error');
+      toggleFade(parent.querySelector('span')).remove();
+    },
+    true,
+  );
 
   form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (this.checkValidity()) {
-        return alert('Thank You!')
-      }
-      document.querySelector('.submit-btn').disabled = true;
-      [...this.elements]
-        .filter(el => el.tagName === 'INPUT' && !el.checkValidity()).forEach(showError)
+    event.preventDefault();
+    if (this.checkValidity()) {
+      return alert('Thank You!');
     }
-  );
-})
+    document.querySelector('.submit-btn').disabled = true;
+    [...this.elements]
+      .filter((el) => el.tagName === 'INPUT' && !el.checkValidity())
+      .forEach(showError);
+  });
+});

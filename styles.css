@@ -75,6 +75,10 @@ main {
     gap: 1.5rem;
 }
 
+h2 {
+    font-weight: 400;
+}
+
 form {
     background-color: var(--color-white);
     border-radius: var(--border-sm);
@@ -134,7 +138,7 @@ label.error input {
 .attribution {
     align-items: center;
     display: flex;
-    font-size: var(--text-xs);
+    font-size: 8px;
     gap: .2rem;
     justify-content: center;
     text-align: center;
@@ -142,6 +146,11 @@ label.error input {
 
 .attribution a {
     color: var(--color-purple);
+    text-decoration: none;
+}
+
+.attribution a:hover {
+    transform: scale(1.1);
 }
 
 .btn {
@@ -170,13 +179,14 @@ span.faded-out {
     text-decoration: none;
 }
 
-.try-btn {
+.try {
     align-items: center;
     background-color: var(--color-purple);
     border-radius: var(--border-lg);
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.14688);
     display: flex;
     flex-direction: column;
+    font-size: var(--text-md);
     gap: .5rem;
     justify-content: center;
     padding: 1.35rem 0;
@@ -241,7 +251,7 @@ span.faded-out {
         font-size: var(--text-md);
     }
 
-    .try-btn {
+    .try {
         flex-direction: row;
     }
 }
