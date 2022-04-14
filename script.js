@@ -1,6 +1,7 @@
 // import FormValidator from "./form-validator.js";
 document.addEventListener('DOMContentLoaded', () => {
   let form = document.querySelector('form');
+  let submitBtn = document.querySelector('.submit-btn');
 
   const toggleFade = (span) => {
     span.classList.toggle('faded-out');
@@ -18,15 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showError(field) {
     let message;
+    let label = field.closest('label');
     if (field.validity.valueMissing) {
-      let labelText = field.closest('label').getAttribute('aria-label')
+      let labelText = label.getAttribute('aria-label')
       message = `${labelText} cannot be empty`;
     }
     if (field.validity.patternMismatch) {
       message = 'Looks like this is not an email';
     }
-    appendError(field.parentElement, message);
+    appendError(label, message);
   }
+
+  form.addEventListener('blur', () => {
+    if (!submitBtn.disabled) return;
+    submitBtn.disabled = form.checkValidity();
+  }, true);
 
   form.addEventListener('focus', ({target}) => {
     let parent = target.parentElement;
@@ -40,10 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.checkValidity()) {
         return alert('Thank You!')
       }
+      document.querySelector('.submit-btn').disabled = true;
       [...this.elements]
         .filter(el => el.tagName === 'INPUT' && !el.checkValidity()).forEach(showError)
     }
-  )
-  ;
-
+  );
 })

@@ -66,13 +66,13 @@ header p {
     font-weight: 500;
     text-align: center;
     padding: 0 .5rem;
+    max-width: 525px;
 }
 
 main {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-width: 525px;
 }
 
 form {
@@ -120,7 +120,7 @@ label.error:after {
     content: '';
     height: 1.5rem;
     position: absolute;
-    right: 2rem;
+    right: 1.5rem;
     top: 0;
     transform: translateY(50%);
     width: 1.5rem;
@@ -132,14 +132,17 @@ label.error input {
 }
 
 .attribution {
+    align-items: center;
+    display: flex;
     font-size: var(--text-xs);
+    gap: .2rem;
+    justify-content: center;
     text-align: center;
 }
 
 .attribution a {
     color: var(--color-purple);
 }
-
 
 .btn {
     color: var(--color-white);
@@ -189,6 +192,11 @@ span.faded-out {
     text-transform: uppercase;
 }
 
+.submit-btn:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
 @media screen and (min-width: 1110px) {
     :root {
         --header-align: 'left';
@@ -202,8 +210,7 @@ span.faded-out {
         display: grid;
         column-gap: 45px;
         grid-template-rows: 1fr min-content;
-        /*grid-template-columns: minmax(1.5rem, 165px) repeat(2, 1fr) minmax(1.5rem, 165px);*/
-        grid-template-columns: minmax(1.5rem, 165px) 525px 540px minmax(1.5rem, 165px);
+        grid-template-columns: minmax(2rem, 165px) 525px 540px minmax(2rem, 165px);
         justify-content: space-between;
         max-height: 100vh;
         padding-top: 4.8125rem;
@@ -213,6 +220,7 @@ span.faded-out {
         align-items: flex-start;
         grid-row: 1;
         grid-column: 2 / span 1;
+        max-width: 525px;
     }
 
     header p {
@@ -236,5 +244,4 @@ span.faded-out {
     .try-btn {
         flex-direction: row;
     }
-
 }
